@@ -39,7 +39,7 @@ This includes the feature of an output file that contains all the function outpu
    - It's recommended to use a virtual environment.
    ```bash
   python -m venv myenv
-  python/scripts/activate
+  myenv/scripts/activate
     ```
     - Install dependencies
    ```bash
