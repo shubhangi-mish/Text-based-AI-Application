@@ -30,8 +30,8 @@ This includes the feature of an output file that contains all the function outpu
 - Clone the Repository:
 
 ```bash
-  git clone https://github.com/your/repository.git
-  cd repository-name
+  git clone https://github.com/shubhangi-mish/Text-based-AI-Application.git
+
 
 ```
 - Set Up Python Environment:
