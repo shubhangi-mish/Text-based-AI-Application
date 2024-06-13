@@ -1,0 +1,6 @@
+transformers
+langchain-huggingface
+huggingface_hub
+langchain
+accelerate
+bitsandbytes
