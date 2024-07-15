@@ -13,7 +13,8 @@ Multi-functional text-based tasks Application
 2. Translate Text
 3. Expand Text
 4. Fact-Check Text/AMA(Ask Me Anything)
-5. Exit
+5. Voice Assistant
+6. Exit
 Choose an option (1-5): 1
 1. Summarize each paragraph individually
 2. Summarize the whole text
