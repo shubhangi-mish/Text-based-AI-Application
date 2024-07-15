@@ -2,7 +2,7 @@ import requests
 from summarization import summarize_text
 from translation import translate_text, handle_translation
 from expansion import expand_text, handle_expansion
-from fact_check import fact_check_text, handle_fact_check
+from fact_check import handle_fact_check
 from voice_assistant import recognize_speech, speak_text, record_audio
 
 WAVE_OUTPUT_FILENAME = "output.wav"
