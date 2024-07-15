@@ -4,7 +4,7 @@ import requests
 import json
 import pyttsx3
 
-# Constants
+
 AUDIO_FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
@@ -12,9 +12,9 @@ CHUNK = 1024
 RECORD_SECONDS = 5
 WAVE_OUTPUT_FILENAME = "output.wav"
 
-# Hugging Face API endpoint and token
+
 HF_API_ENDPOINT = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
-HF_API_TOKEN = "hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  # Replace with your actual Hugging Face API token
+HF_API_TOKEN = "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"  
 
 # Initialize text-to-speech engine
 engine = pyttsx3.init()
