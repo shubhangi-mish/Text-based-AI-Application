@@ -6,24 +6,32 @@ This application provides a text-based tasks interface that leverages various Hu
 
 ## Features
 
-- Summarize Text:
-Option to summarize each paragraph individually or the entire text.
+
 ```bash
+Multi-functional text-based tasks Application
+1. Summarize Text
+2. Translate Text
+3. Expand Text
+4. Fact-Check Text/AMA(Ask Me Anything)
+5. Exit
 Choose an option (1-5): 1
 1. Summarize each paragraph individually
 2. Summarize the whole text
 
 ```
+- Summarize Text:
+Option to summarize each paragraph individually or the entire text.
 - Translate Text:
 Translate text between different languages supported by Hugging Face APIs.
 - Expand Text:
 Generate expanded text based on a given prompt using language models.
 - Fact-Check Text:
 Verify the factual accuracy of a given text using Hugging Face's fact-checking capabilities.
+- Voice Assistant:
+This gives a feature of a voice assistant and its capabilites to use this application.
 - Output file
 This includes the feature of an output file that contains all the function outputs executed till then.
-- Voice Assistant
-This gives a feature of a voice assistant and its capabilites to use this application.
+
 
 
 
