@@ -3,6 +3,9 @@ from summarization import summarize_text
 from translation import translate_text, handle_translation
 from expansion import expand_text, handle_expansion
 from fact_check import fact_check_text, handle_fact_check
+from voice_assistant import recognize_speech, speak_text, record_audio
+
+WAVE_OUTPUT_FILENAME = "output.wav"
 
 def main():
     output_file = "output.txt"  
@@ -14,8 +17,9 @@ def main():
                 print("2. Translate Text")
                 print("3. Expand Text")
                 print("4. Fact-Check Text/AMA(Ask Me Anything)")
-                print("5. Exit")
-                choice = input("Choose an option (1-5): ")
+                print("5. Voice Assistant")
+                print("6. Exit")
+                choice = input("Choose an option (1-6): ")
 
                 if choice == '1':
                     print("1. Summarize each paragraph individually")
@@ -30,7 +34,7 @@ def main():
                 elif choice == '2':
                     print("Enter text to translate (end input by pressing Enter twice/2 blank lines):")
                     text = read_multiline_input()
-                    print("choose your source/target languages from these and enter the appropriate language code:\n"
+                    print("Choose your source/target languages from these and enter the appropriate language code:\n"
                           "    Arabic (ar_AR), Czech (cs_CZ), German (de_DE), English (en_XX), Spanish (es_XX), Estonian (et_EE),\n"
                           "    Finnish (fi_FI), French (fr_XX), Gujarati (gu_IN), Hindi (hi_IN), Italian (it_IT), Japanese (ja_XX),\n"
                           "    Kazakh (kk_KZ), Korean (ko_KR), Lithuanian (lt_LT), Latvian (lv_LV), Burmese (my_MM), Nepali (ne_NP),\n"
@@ -58,6 +62,18 @@ def main():
                     print(fact_checked_text)
                     f.write("\n" + "="*50 + "\n\n")
                 elif choice == '5':
+                    print("Voice Assistant is active. Please say your command.")
+                    speak_text("Please say the number for the command you want to perform: 1 for summarize, 2 for translate, 3 for expand, 4 for fact-check.")
+                    record_audio(WAVE_OUTPUT_FILENAME)
+                    command = recognize_speech(WAVE_OUTPUT_FILENAME)
+                    if command:
+                        print(f"Processing command: {command}")
+                        command_number = get_command_number(command)
+                        switch_voice_assistant(command_number, f)
+                    else:
+                        speak_text("I didn't catch that. Please try again.")
+                    f.write("\n" + "="*50 + "\n\n")
+                elif choice == '6':
                     break
                 else:
                     print("Invalid choice. Please try again.")
@@ -66,12 +82,11 @@ def main():
                 break
 
 def read_multiline_input():
-    print("Please enter your text. Press Enter on a blank line to finish.")
     lines = []
     paragraph = []
     while True:
         line = input()
-        if line == "":
+        if line == "\n":
             if paragraph:
                 lines.append("\n".join(paragraph))
                 paragraph = []
@@ -106,6 +121,57 @@ def summarization_menu(text, summarization_choice, file_handle):
         print(f"Failed to summarize text due to a connection error: {e}")
     except Exception as e:
         print(f"An error occurred while summarizing text: {e}")
+
+def get_command_number(command):
+    command = command.strip().lower()
+    if "1" in command or "one" in command:
+        return 1
+    elif "2" in command or "two" in command:
+        return 2
+    elif "3" in command or "three" in command:
+        return 3
+    elif "4" in command or "four" in command:
+        return 4
+    else:
+        return None
+
+def switch_voice_assistant(command_number, file_handle):
+    if command_number == 1:
+        speak_text("Please say the text you want to summarize.")
+        record_audio(WAVE_OUTPUT_FILENAME)
+        text = recognize_speech(WAVE_OUTPUT_FILENAME)
+        if text:
+            summarization_menu(text, "2", file_handle)
+    elif command_number == 2:
+        speak_text("Please say the text you want to translate.")
+        record_audio(WAVE_OUTPUT_FILENAME)
+        text = recognize_speech(WAVE_OUTPUT_FILENAME)
+        if text:
+            speak_text("Please say the target language.")
+            record_audio(WAVE_OUTPUT_FILENAME)
+            target_language = recognize_speech(WAVE_OUTPUT_FILENAME)
+            if target_language:
+                translated_text = handle_translation(text, "en_XX", target_language, file_handle)
+                speak_text("Translation completed. Here is the translation.")
+                speak_text(translated_text)
+    elif command_number == 3:
+        speak_text("Please say the prompt you want to expand.")
+        record_audio(WAVE_OUTPUT_FILENAME)
+        prompt = recognize_speech(WAVE_OUTPUT_FILENAME)
+        if prompt:
+            expanded_text = handle_expansion(prompt, file_handle)
+            speak_text("Expansion completed. Here is the expanded text.")
+            speak_text(expanded_text)
+    elif command_number == 4:
+        speak_text("Please say the text you want to fact-check or ask.")
+        record_audio(WAVE_OUTPUT_FILENAME)
+        prompt = recognize_speech(WAVE_OUTPUT_FILENAME)
+        if prompt:
+            fact_checked_text = handle_fact_check(prompt, file_handle)
+            speak_text("Fact-checking completed. Here is the result.")
+            speak_text(fact_checked_text)
+    else:
+        speak_text("Sorry, I don't understand that command.")
 
 if __name__ == "__main__":
     main()
