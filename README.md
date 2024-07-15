@@ -22,6 +22,8 @@ Generate expanded text based on a given prompt using language models.
 Verify the factual accuracy of a given text using Hugging Face's fact-checking capabilities.
 - Output file
 This includes the feature of an output file that contains all the function outputs executed till then.
+- Voice Assistant
+This gives a feature of a voice assistant and its capabilites to use this application.
 
 
 
@@ -64,7 +66,8 @@ python main.py
 2. Translate Text
 3. Expand Text
 4. Fact-Check Text/AMA(Ask Me Anything)
-5. Exit
+5. Voice Assistant
+6. Exit
 
 ```
 - Input instruction:
@@ -168,5 +171,21 @@ Kobe Bryant was a professional basketball player who played for the Los Angeles 
 
 Step 2/2
 On January 26, 2020, Kobe Bryant and his 13-year-old daughter Gianna were among nine people who
+
+```
+- Voice Assistant
+```bash
+Choose an option (1-6): 5
+Voice Assistant is active. Please say your command.
+* Recording audio...
+* Finished recording.
+Recognized Text:  Two.
+Processing command:  Two.
+* Recording audio...
+* Finished recording.
+Recognized Text:  Hello, how are you?
+* Recording audio...
+* Finished recording.
+Recognized Text:  Thanks.
 
 ```
